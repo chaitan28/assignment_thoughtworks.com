@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "news4321_rg_joi_interview"
-    storage_account_name = "news4321sajoiinterview"
-    container_name       = "news4321terraformcontainerjoiinterview"
+    resource_group_name  = "newsv9_rg_joi_interview"
+    storage_account_name = "newsv9sajoiinterview"
+    container_name       = "newsv9terraformcontainerjoiinterview"
     key                  = "terraform.tfstate"
   }
 }
