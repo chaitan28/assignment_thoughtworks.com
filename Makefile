@@ -86,6 +86,12 @@ backend-support.infra:
 backend-support.deinfra:
 	cd ~/assignment_thoughtworks.com/infra/backend-support && terraform destroy -auto-approve
 
+base.infra:
+	cd ~/assignment_thoughtworks.com/infra/base && terraform init && terraform apply -auto-approve
+
+base.deinfra:
+	cd ~/assignment_thoughtworks.com/infra/base && terraform destroy -auto-approve
+
 deploy_interview:
 	$(MAKE) az_login
 	$(MAKE) az_account
