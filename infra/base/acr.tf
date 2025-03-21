@@ -1,9 +1,11 @@
-
+# User-Assigned Identity
 resource "azurerm_user_assigned_identity" "identity-acr" {
   resource_group_name = data.azurerm_resource_group.azure-resource.name
   location            = var.location
   name                = "identity-acr"
 }
+
+# Azure Container Registries (ACRs)
 resource "azurerm_container_registry" "quotes" {
   name                = "${var.prefix}quotes"
   resource_group_name = data.azurerm_resource_group.azure-resource.name
@@ -27,59 +29,65 @@ resource "azurerm_container_registry" "frontend" {
   sku                 = "Basic"
   admin_enabled       = false
 }
-resource "random_uuid" "acrpull_id_frontend" {
+
+# Random UUIDs for Role Assignments (AcrPush only)
+resource "random_uuid" "acrpush_id_quotes" {
   keepers = {
-    acr_id = "${azurerm_container_registry.frontend.id}"
-    sp_id  = "${azurerm_user_assigned_identity.identity-acr.principal_id}"
-    role   = "AcrPull"
+    acr_id = azurerm_container_registry.quotes.id
+    sp_id  = azurerm_user_assigned_identity.identity-acr.principal_id
+    role   = "AcrPush"
   }
 }
 
-resource "random_uuid" "acrpull_id_quotes" {
+resource "random_uuid" "acrpush_id_newsfeed" {
   keepers = {
-    acr_id = "${azurerm_container_registry.quotes.id}"
-    sp_id  = "${azurerm_user_assigned_identity.identity-acr.principal_id}"
-    role   = "AcrPull"
+    acr_id = azurerm_container_registry.newsfeed.id
+    sp_id  = azurerm_user_assigned_identity.identity-acr.principal_id
+    role   = "AcrPush"
   }
 }
 
-resource "random_uuid" "acrpull_id_newsfeed" {
+resource "random_uuid" "acrpush_id_frontend" {
   keepers = {
-    acr_id = "${azurerm_container_registry.newsfeed.id}"
-    sp_id  = "${azurerm_user_assigned_identity.identity-acr.principal_id}"
-    role   = "AcrPull"
+    acr_id = azurerm_container_registry.frontend.id
+    sp_id  = azurerm_user_assigned_identity.identity-acr.principal_id
+    role   = "AcrPush"
   }
 }
 
-data "azurerm_role_definition" "acrpull" {
-  name = "AcrPull"
+# Role Definition for AcrPush
+data "azurerm_role_definition" "acrpush" {
+  name = "AcrPush"
 }
 
-resource "azurerm_role_assignment" "acr_acrpull_quotes" {
-  name               = random_uuid.acrpull_id_quotes.result
+# Role Assignments for AcrPush
+resource "azurerm_role_assignment" "acr_acrpush_quotes" {
+  name               = random_uuid.acrpush_id_quotes.result
   scope              = azurerm_container_registry.quotes.id
-  role_definition_id = data.azurerm_role_definition.acrpull.id
+  role_definition_id = data.azurerm_role_definition.acrpush.id
   principal_id       = azurerm_user_assigned_identity.identity-acr.principal_id
 }
 
-resource "azurerm_role_assignment" "acr_acrpull_newsfeed" {
-  name               = random_uuid.acrpull_id_newsfeed.result
+resource "azurerm_role_assignment" "acr_acrpush_newsfeed" {
+  name               = random_uuid.acrpush_id_newsfeed.result
   scope              = azurerm_container_registry.newsfeed.id
-  role_definition_id = data.azurerm_role_definition.acrpull.id
+  role_definition_id = data.azurerm_role_definition.acrpush.id
   principal_id       = azurerm_user_assigned_identity.identity-acr.principal_id
 }
 
-resource "azurerm_role_assignment" "acr_acrpull_frontend" {
-  name               = random_uuid.acrpull_id_frontend.result
+resource "azurerm_role_assignment" "acr_acrpush_frontend" {
+  name               = random_uuid.acrpush_id_frontend.result
   scope              = azurerm_container_registry.frontend.id
-  role_definition_id = data.azurerm_role_definition.acrpull.id
+  role_definition_id = data.azurerm_role_definition.acrpush.id
   principal_id       = azurerm_user_assigned_identity.identity-acr.principal_id
 }
 
+# Local Variables
 locals {
   acr_url = ".azurecr.io"
 }
 
+# Output to File
 resource "local_file" "acr" {
   filename = "${path.module}/../acr-url.txt"
   content  = local.acr_url

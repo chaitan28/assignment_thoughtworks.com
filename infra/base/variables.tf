@@ -1,7 +1,7 @@
 variable "prefix" {
-  default = "news4321"
+  default = "newsv9"
 }
 
 variable "location" {
-  default = "East US"
+  default = "northeurope"
 }
