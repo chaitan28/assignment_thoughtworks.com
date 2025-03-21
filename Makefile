@@ -81,10 +81,10 @@ deploy_site:
 	az storage blob upload-batch --destination news$(PREFIX)psc --account-name news$(PREFIX)psa --source build	
 
 backend-support.infra:
-	cd ~/infra/backend-support && terraform init && terraform apply -auto-approve
+	cd ~/assignment_thoughtworks.com/infra/backend-support && terraform init && terraform apply -auto-approve
 
 backend-support.deinfra:
-	cd /~infra/backend-support && terraform destroy -auto-approve
+	cd ~/assignment_thoughtworks.com/infra/backend-support && terraform destroy -auto-approve
 
 deploy_interview:
 	$(MAKE) az_login
