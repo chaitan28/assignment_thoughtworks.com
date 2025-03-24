@@ -5,6 +5,7 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = ">=2.99"
+      subscription_id = "1d342b09-7474-440d-a4c0-4d42e7768976"
     }
   }
 
