@@ -40,6 +40,11 @@ module "quotes_vm" {
   network_interface_id = data.azurerm_network_interface.network-interface-quotes.id
   identity_id          = data.azurerm_user_assigned_identity.identity-acr.id
   container_image      = "${var.prefix}quotes${var.acr_url_default}/${var.prefix}quotes:latest"
+
+  depends_on = [
+    data.azurerm_network_interface.network-interface-quotes,
+    data.azurerm_user_assigned_identity.identity-acr
+  ]
 }
 
 module "newsfeed_vm" {
@@ -50,6 +55,11 @@ module "newsfeed_vm" {
   network_interface_id = data.azurerm_network_interface.network-interface-newsfeed.id
   identity_id          = data.azurerm_user_assigned_identity.identity-acr.id
   container_image      = "${var.prefix}newsfeed${var.acr_url_default}/${var.prefix}newsfeed:latest"
+
+  depends_on = [
+    data.azurerm_network_interface.network-interface-newsfeed,
+    data.azurerm_user_assigned_identity.identity-acr
+  ]
 }
 
 module "frontend_vm" {
@@ -60,6 +70,11 @@ module "frontend_vm" {
   network_interface_id = data.azurerm_network_interface.network-interface-frontend.id
   identity_id          = data.azurerm_user_assigned_identity.identity-acr.id
   container_image      = "${var.prefix}frontend${var.acr_url_default}/${var.prefix}frontend:latest"
+
+  depends_on = [
+    data.azurerm_network_interface.network-interface-frontend,
+    data.azurerm_user_assigned_identity.identity-acr
+  ]
 }
 
 
