@@ -41,13 +41,6 @@ $(BUILD_DIR):
 	$(eval IMAGE_NAME = $(subst -,_,$*))	
 	cd $* && docker buildx build --platform linux/amd64 --load -t $(IMAGE_NAME) .	
 
-_%.push:
-	$(eval IMAGE_NAME = $(subst -,_,$*))
-	$(eval REPO_URL := $(shell cat ${ACR_URL_FILE}))	
-	docker tag $(IMAGE_NAME) news$(PREFIX)$(subst _,,$(IMAGE_NAME))$(REPO_URL)/news$(PREFIX)$(subst _,,$(IMAGE_NAME))
-	az acr login --name news$(PREFIX)$(subst _,,$(IMAGE_NAME)) 
-	docker push news$(PREFIX)$(subst _,,$(IMAGE_NAME))$(REPO_URL)/news$(PREFIX)$(subst _,,$(IMAGE_NAME))
-
 %.push:
 	$(eval IMAGE_NAME = $(subst -,_,$*))
 	$(eval REPO_URL := $(shell cat ${ACR_URL_FILE}))	
