@@ -77,11 +77,11 @@ base.infra:
 
 base.deinfra:
 	cd ~/assignment_thoughtworks.com/infra/base && terraform destroy -auto-approve
-	
-base.news:
+
+news.infra:
 	cd ~/assignment_thoughtworks.com/infra/news && terraform init && terraform apply -auto-approve
 
-base.news:
+news.deinfra:
 	cd ~/assignment_thoughtworks.com/infra/news && terraform destroy -auto-approve
 
 
