@@ -5,7 +5,6 @@ STATIC_PATHS=css
 STATIC_ARCHIVE=$(BUILD_DIR)/static.tgz
 DOCKER_TARGETS=$(addsuffix .docker, $(APPS))
 DOCKER_PUSH_TARGETS=$(addsuffix .push, $(APPS))
-_DOCKER_PUSH_TARGETS=$(addprefix _, $(DOCKER_PUSH_TARGETS))
 ACR_URL_FILE=infra/acr-url.txt
 SSH_KEY=infra/id_rsa
 PREFIX=$$(cat interview_id.txt)
