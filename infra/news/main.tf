@@ -62,6 +62,4 @@ module "frontend_vm" {
   container_image      = "${var.prefix}frontend${var.acr_url_default}/${var.prefix}frontend:latest"
 }
 
-output "frontend_url" {
-  value = "http://${azurerm_linux_virtual_machine.virtual-machine-frontend.public_ip_address}:8080"
-}
+
