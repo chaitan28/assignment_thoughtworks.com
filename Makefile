@@ -6,7 +6,7 @@ STATIC_ARCHIVE=$(BUILD_DIR)/static.tgz
 DOCKER_TARGETS=$(addsuffix .docker, $(APPS))
 DOCKER_PUSH_TARGETS=$(addsuffix .push, $(APPS))
 ACR_URL_FILE=infra/acr-url.txt
-SSH_KEY=infra/id_rsa
+SSH_KEY=infra/news/id_rsa
 PREFIX=$$(cat interview_id.txt)
 RESOURCE_GROUP_NAME=news$(PREFIX)_rg_joi_interview
 STORAGE_ACCOUNT_NAME=news$(PREFIX)sajoiinterview
@@ -57,12 +57,6 @@ $(SSH_KEY):
 
 ssh_key: $(SSH_KEY)
 
-%.infra: ssh_key
-	cd infra/$* && rm -rf .terraform && terraform init && terraform apply -auto-approve
-
-%.deinfra: ssh_key
-	cd infra/$* && terraform init && terraform destroy -auto-approve
-
 deploy_site:
 	cd build &&\
 	mkdir -p static &&\
@@ -83,6 +77,12 @@ base.infra:
 
 base.deinfra:
 	cd ~/assignment_thoughtworks.com/infra/base && terraform destroy -auto-approve
+base.news:
+	cd ~/assignment_thoughtworks.com/infra/news && terraform init && terraform apply -auto-approve
+
+base.news:
+	cd ~/assignment_thoughtworks.com/infra/news && terraform destroy -auto-approve
+
 
 deploy_interview:
 	$(MAKE) az_login
@@ -94,6 +94,7 @@ deploy_interview:
 	$(MAKE) push
 	$(MAKE) static
 	$(MAKE) deploy_site	
+	$(MAKE) ssh_key	
 	$(MAKE) news.infra	
 
 destroy_interview:
