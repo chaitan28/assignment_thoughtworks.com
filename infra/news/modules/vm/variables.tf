@@ -5,7 +5,7 @@ variable "vm_size" { default = "Standard_D2lds_v6" }
 variable "network_interface_id" {}
 variable "identity_id" {}
 variable "os_sku" { default = "24.04-LTS" }
-variable "os_version" { default = "x64 Gen2" }
+variable "os_version" { default = "latest" }
 variable "container_image" {}
 
 
