@@ -5,7 +5,7 @@ variable "vm_size" { default = "Standard_B1s" }
 variable "network_interface_id" {}
 variable "identity_id" {}
 variable "os_sku" { default = "18.04-LTS " }
-variable "os_version" { default = "18.04.202304270" }
+variable "os_version" { default = "18.04" }
 variable "container_image" {}
 
 
