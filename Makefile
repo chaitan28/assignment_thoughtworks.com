@@ -77,6 +77,7 @@ base.infra:
 
 base.deinfra:
 	cd ~/assignment_thoughtworks.com/infra/base && terraform destroy -auto-approve
+	
 base.news:
 	cd ~/assignment_thoughtworks.com/infra/news && terraform init && terraform apply -auto-approve
 

@@ -24,8 +24,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = var.os_image
-    version   = var.vm_size
+    sku       = var.os_sku
+    version   = var.os_version
   }
 
   connection {
