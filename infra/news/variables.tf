@@ -3,7 +3,7 @@ variable "prefix" {
 }
 
 variable "location" {
-  default = "East US"
+  default = "northeurope"
 }
 
 variable "acr_url_default" {
