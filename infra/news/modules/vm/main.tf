@@ -57,7 +57,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/adminuser/provision-${var.vm_name}.sh",
-      "/home/adminuser/provision-${var.vm_name}.sh ${var.container_image} ${var.identity_id} ${var.vm_name}"
+      "/home/adminuser/provision-${var.vm_name}.sh ${var.container_image} ${var.identity_id} ${var.vm_name.azurecr.io}"
     ]
   }
 }
