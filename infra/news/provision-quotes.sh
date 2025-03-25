@@ -11,7 +11,7 @@ echo "Provisioning docker image $DOCKER_IMAGE"
 # cleanup previous deployment
 sudo docker stop quotes || true
 sudo docker rm quotes || true
-
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 sudo az login --identity --username $IDENTITY_ID
 
 sudo az acr login --name $ACR_NAME
