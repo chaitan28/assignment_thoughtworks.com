@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     type        = "ssh"
     private_key = file("${path.module}/../../id_rsa")
     timeout     = "1m"
-    agent       = true
+    agent       = false
   }
 
   provisioner "file" {
