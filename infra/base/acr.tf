@@ -12,6 +12,7 @@ resource "azurerm_container_registry" "quotes" {
   location            = var.location
   sku                 = "Basic"
   admin_enabled       = false
+  public_network_access_enabled = true  # Enable public access
 }
 
 resource "azurerm_container_registry" "newsfeed" {
@@ -20,6 +21,7 @@ resource "azurerm_container_registry" "newsfeed" {
   location            = var.location
   sku                 = "Basic"
   admin_enabled       = false
+  public_network_access_enabled = true  # Enable public access
 }
 
 resource "azurerm_container_registry" "frontend" {
@@ -28,6 +30,7 @@ resource "azurerm_container_registry" "frontend" {
   location            = var.location
   sku                 = "Basic"
   admin_enabled       = false
+  public_network_access_enabled = true  # Enable public access
 }
 
 # Random UUIDs for Role Assignments (AcrPush only)
