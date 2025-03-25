@@ -4,7 +4,7 @@ DOCKER_IMAGE=$1
 IDENTITY_ID=$2
 ACR_NAME=$3
 
-
+${var.container_image} ${var.identity_id} ${var.vm_name}
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 echo "Provisioning docker image $DOCKER_IMAGE"

@@ -7,6 +7,9 @@ variable "identity_id" {}
 variable "os_sku" { default = "18.04-LTS" }
 variable "os_version" { default = "18.04.202401161" }
 variable "container_image" {}
+variable "acr_url_default" {
+  default = ".azurecr.io"
+}
 
 
 
