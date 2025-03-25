@@ -3,9 +3,6 @@
 DOCKER_IMAGE=$1
 IDENTITY_ID=$2
 ACR_NAME=$3
-QUOTE_SERVICE_URL=$4
-NEWSFEED_SERVICE_URL=$5
-STATIC_URL=$6
 
 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
