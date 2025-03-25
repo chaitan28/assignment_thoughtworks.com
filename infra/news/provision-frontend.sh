@@ -1,8 +1,11 @@
 #!/bin/bash -e
 
-DOCKER_IMAGE=$1
-IDENTITY_ID=$2
-ACR_NAME=$3
+# DOCKER_IMAGE=$1
+# IDENTITY_ID=$2
+# ACR_NAME=$3
+DOCKER_IMAGE="${container_image}"
+IDENTITY_ID="${identity_id}"
+SERVICE_NAME="${vm_name}"
 
 ${var.container_image} ${var.identity_id} ${var.vm_name}
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
