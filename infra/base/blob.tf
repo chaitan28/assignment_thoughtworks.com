@@ -8,7 +8,7 @@ resource "azurerm_storage_account" "public-storage-account" {
 
 resource "azurerm_storage_container" "public-storage-container" {
   name                  = "${var.prefix}psc"
-  storage_account_name  = azurerm_storage_account.public-storage-account.name  
+  storage_account_name = azurerm_storage_account.public-storage-account.name 
   container_access_type = "blob"
 }
 
