@@ -17,7 +17,7 @@ sudo docker stop front_end || true
 sudo docker rm front_end || true
 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-sudo az login --identity --username $IDENTITY_ID
+sudo az login --identity
 
 sudo az acr login --name $ACR_NAME
 
