@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
-# DOCKER_IMAGE=$1
-# IDENTITY_ID=$2
-# ACR_NAME=$3
-DOCKER_IMAGE="${container_image}"
-IDENTITY_ID="${identity_id}"
-SERVICE_NAME="${vm_name}"
+DOCKER_IMAGE=$1
+IDENTITY_ID=$2
+ACR_NAME=$3
+QUOTE_SERVICE_URL=$4
+NEWSFEED_SERVICE_URL=$5
+STATIC_URL=$6
 
-${var.container_image} ${var.identity_id} ${var.vm_name}
+
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 echo "Provisioning docker image $DOCKER_IMAGE"
@@ -16,8 +16,7 @@ echo "Provisioning docker image $DOCKER_IMAGE"
 sudo docker stop front_end || true
 sudo docker rm front_end || true
 
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-sudo az login --identity
+sudo az login --identity --username $IDENTITY_ID
 
 sudo az acr login --name $ACR_NAME
 
